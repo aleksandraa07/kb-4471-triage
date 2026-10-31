@@ -1,0 +1,85 @@
+---
+layout: runbook
+title: '#4471 · three problems, not one'
+owner: aleksandraa07
+status: proposed
+reviewed: 2026-10-31
+signature: aleksandraa07
+---
+
+<script>
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import OneDayMove from '#lib/kb/OneDayMove.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+[#4471](/kb/incidents/4471) is marked known, with one fix queued. Read back, the reports under
+it are not one bug. They are three, and two of them have no ticket, no owner and no fix.
+
+The desk did not miss this. The kb has been showing it on every build.
+
+## What the ticket already shows
+
+<CauseTable ticket={4471} />
+
+The table splits the ticket by [`causeOf`](/kb/triage/dedupe), and `causes.ts` says in as many
+words that the second one is "a different bug". The last column says it has no ticket of its
+own. The footnote under the table counts reports the desk read as something else again.
+
+<Callout kind="warn">
+Nothing here is new data. This is the same table the incident page renders, read as a finding
+instead of a detail.
+</Callout>
+
+## The third problem
+
+`causeOf` decides from the tenant and the channel. It never reads the report. So a report
+describing a different symptom still comes out as `parser`, because its tenant writes dates
+day first — which is true, and beside the point.
+
+<OneDayMove ticket={4471} />
+
+These are not a swapped month. A swap moves 7 April to 4 July. These move one day, or move a
+meeting between two cities, or deliver an invite before the booking that caused it. The month
+is right in every one of them.
+
+## The three tickets
+
+| problem | reports | who sees it |
+| --- | --- | --- |
+| The shared parser reads every date month first, so day-first tenants get the month and the day exchanged. | 374 | every tenant, all three channels |
+| `booking-v3` prints the hint `MM/DD/YYYY`, people type month first, and the form reads it day first. | 33 | three tenants, the form only |
+| A one-day move, unrelated to date order. | 5 | five tenants, app and email |
+
+374 + 33 + 5 = 412, the whole ticket.
+
+The 5 sit inside the 379 that `causeOf` calls `parser`, because it files them by tenant. Counted
+as their own problem they come out of that group, which is why the parser row here reads 374 and
+the table above reads 379.
+
+## Why one ticket held three
+
+[Decision 0001](/kb/decisions/0001-dedupe-by-subject) merges on the subject line alone, so
+nobody has to read the body. Every report here has a subject like "Date is wrong" or "Wrong day
+on the invite". Twelve subjects cover all 412, and they describe the symptom a person noticed,
+never the bug underneath.
+
+The decision names this consequence and accepts it: "Reports with different subjects about the
+same bug end up in separate tickets." The ticket shows the opposite too, and that one is not
+written down: reports with the *same* subject about *different* bugs end up in one ticket, and
+the count makes it look settled.
+
+A count is evidence of how many people are affected. It is not evidence of how many things are
+broken.
+
+## What to do
+
+- Open one ticket per problem, each with the reports it covers.
+- Leave #4471 as the parser ticket, with 374.
+- `intakeTag` disagrees with `causeOf` on 38 of the 412. Intake guesses from the reporter's
+  browser; the cause depends on the tenant. Worth its own page, not this one.
+- The export ships 427 rows for 412 reports; the pages overlap. `uniqueById` already handles
+  it. Any count taken straight off the export is 15 too high.
+
+<RenderStamp {signature} />
