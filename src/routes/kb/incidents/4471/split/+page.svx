@@ -73,10 +73,42 @@ the count makes it look settled.
 A count is evidence of how many people are affected. It is not evidence of how many things are
 broken.
 
+## What the closing left behind
+
+#4471 was closed on 5 October. The engineering update gives two outcomes:
+
+| cause | outcome | what changed |
+| --- | --- | --- |
+| `parser` | fixed | `fix(dates): parse dd/mm for eu locales` |
+| `hint` | won't fix | `booking-v3` form retired |
+
+The one-day move is in neither row. It was not fixed, not declined, and not named. It was
+closed along with the ticket it had been merged into.
+
+That is the same move made twice. The merge put five reports under a cause that did not
+describe them, and the close carried them out again. Neither step was a decision about the
+bug. Both were decisions about the ticket.
+
+The parser fix cannot have reached them: it changes how a date string is read, and these five
+have the month right. What they describe — one day, one month affected, a meeting split
+between two cities, an invite that predates its own booking — sits in time handling, which
+nobody has looked at.
+
+<Callout kind="warn">
+Two of the three are settled. The third has no fix, no decision and no owner, and the ticket
+that was holding it is now closed.
+</Callout>
+
 ## What to do
 
-- Open one ticket per problem, each with the reports it covers.
-- Leave #4471 as the parser ticket, with 374.
+- Keep a ticket open for the one-day move. It is the only one of the three still live, and it
+  is the one with nobody's name on it.
+- `hint` closed as won't fix, not as fixed. The form was retired, so the surface is gone; the
+  reader that exchanged the date was never corrected. If any form is ever read that way again,
+  these 33 reports come back.
+- `causeOf` decides from the tenant and the channel and never reads the report. Until that
+  changes, any symptom it has no cause for will land in whichever cause the tenant implies,
+  and will be counted there.
 - `intakeTag` disagrees with `causeOf` on 38 of the 412. Intake guesses from the reporter's
   browser; the cause depends on the tenant. Worth its own page, not this one.
 - The export ships 427 rows for 412 reports; the pages overlap. `uniqueById` already handles

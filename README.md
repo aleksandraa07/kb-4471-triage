@@ -11,6 +11,19 @@ It is three problems, not one. Two of them have no ticket, no owner and no fix.
 
 374 + 33 + 5 = 412. One ticket per problem is filed as an issue in this repo.
 
+## Where they stand
+
+#4471 was closed on 5 October. The engineering update settles two of the three:
+
+| ticket | outcome |
+| --- | --- |
+| [#1](../../issues/1) parser | **closed, completed** — `fix(dates): parse dd/mm for eu locales` |
+| [#2](../../issues/2) `booking-v3` hint | **closed, not planned** — the form was retired, so the surface is gone; the reader was never corrected |
+| [#3](../../issues/3) one-day move | **open** — not fixed, not declined, not named in the update |
+
+The third was closed along with #4471 without anything being decided about it. It is the only
+one of the three still live, and it stays open.
+
 ## What is here
 
 ```

@@ -182,11 +182,46 @@ the count makes it look settled.</p>
 <p>A count is evidence of how many people are affected. It is not evidence of how many things are
 broken.</p>
 
+<h2>What the closing left behind</h2>
+
+<p>#4471 was closed on 5 October. The engineering update gives two outcomes:</p>
+
+<table>
+  <thead><tr><th>cause</th><th>outcome</th><th>what changed</th></tr></thead>
+  <tbody>
+    <tr><td><code>parser</code></td><td>fixed</td><td><code>fix(dates): parse dd/mm for eu locales</code></td></tr>
+    <tr><td><code>hint</code></td><td>won't fix</td><td><code>booking-v3</code> form retired</td></tr>
+  </tbody>
+</table>
+
+<p>The one-day move is in neither row. It was not fixed, not declined, and not named. It was
+closed along with the ticket it had been merged into.</p>
+
+<p>That is the same move made twice. The merge put 5 reports under a cause that did not
+describe them, and the close carried them out again. Neither step was a decision about the
+bug. Both were decisions about the ticket.</p>
+
+<p>The parser fix cannot have reached them: it changes how a date string is read, and these 5
+have the month right. What they describe — one day, one month affected, a meeting split
+between two cities, an invite that predates its own booking — sits in time handling, which
+nobody has looked at.</p>
+
+<aside class="warn">
+Two of the three are settled. The third has no fix, no decision and no owner, and the ticket
+that was holding it is now closed.
+</aside>
+
 <h2>What to do</h2>
 
 <ul>
-<li>Open one ticket per problem, each with the reports it covers.</li>
-<li>Leave #4471 as the parser ticket, with 374.</li>
+<li>Keep a ticket open for the one-day move. It is the only one of the three still live, and it
+is the one with nobody's name on it.</li>
+<li><code>hint</code> closed as won't fix, not as fixed. The form was retired, so the surface is gone;
+the reader that exchanged the date was never corrected. If any form is ever read that way
+again, these 33 reports come back.</li>
+<li><code>causeOf</code> decides from the tenant and the channel and never reads the report. Until that
+changes, any symptom it has no cause for will land in whichever cause the tenant implies, and
+will be counted there.</li>
 <li><code>intakeTag</code> disagrees with <code>causeOf</code> on 38 of the 412. Intake guesses from the reporter's
 browser; the cause depends on the tenant. Worth its own page, not this one.</li>
 <li>The export ships 427 rows for 412 reports; the pages overlap. <code>uniqueById</code> already handles
