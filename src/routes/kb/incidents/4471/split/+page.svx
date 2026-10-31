@@ -4,7 +4,7 @@ title: '#4471 · three problems, not one'
 owner: aleksandraa07
 status: proposed
 reviewed: 2026-10-31
-signature: aleksandraa07
+signature: v1.eyJzdWIiOiIzNjA4IiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTM0NzU4MjMsImV4cCI6MTc5MzU2MjIyM30.2Dq8jAsANHhCZrBu9oMQxw1a7FXLWYy9AtknStgajBY
 ---
 
 <script>

@@ -45,4 +45,6 @@ the page and the data cannot drift apart by a typo.
 
 ## Signature
 
-The page is signed `aleksandraa07`, which gives desk ref `DR-MAWD-JJSZ`.
+The page's `owner:` is `aleksandraa07`. Its `signature:` is the ticket the course issued for
+this Challenge, which is how the course recognises the page as ours. That signature gives desk
+ref `DR-MSBM-SGZ7`, which is what `RenderStamp` prints at the foot of the page.
